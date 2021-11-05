@@ -28,12 +28,12 @@ def initiate(event: dict = {} , context: dict = {}) -> Dict:
     poster.error(e)
     k = { 
           "statusCode": 500,  
-          "body": json.dumps(data)
+          "body": e
       } 
 
   finally:
-    return k       
-    #raise e
+    return k
+    #print(k)
 
 if __name__ == "__main__":
   initiate({}, {})
