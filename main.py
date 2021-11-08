@@ -18,21 +18,22 @@ def initiate(event: dict = {} , context: dict = {}) -> Dict:
     poster.debug("Creation kube action obj")
     kubeObj = kubeActions(kubeconfig)
     data = kubeObj.listrs()
-
-    k = { 
+    poster.debug("Returning with 200OK {}".format(data))
+    answer = { 
           "statusCode": 200,  
           "body": json.dumps(data)
       }
 
   except Exception as e:
     poster.error(e)
-    k = { 
+    answer = { 
           "statusCode": 500,  
           "body": e
       } 
 
   finally:
-    return k
+    poster.debug("Returning...")
+    return answer
     #print(k)
 
 if __name__ == "__main__":

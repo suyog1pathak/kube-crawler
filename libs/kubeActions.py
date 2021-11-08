@@ -13,9 +13,11 @@ class kubeActions:
       self.apiClient = client.ApiClient(kubeConfig)
       warnings.filterwarnings("ignore")
     except Exception as e:
+      poster.error(e)
       raise e 
 
   def listrs(self):
+    """ List Replica Sets"""
     v1 = client.AppsV1Api(self.apiClient)    
     data = v1.list_replica_set_for_all_namespaces(watch=False, label_selector="app.kubernetes.io/managed-by")
     dataHolder = []

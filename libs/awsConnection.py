@@ -2,17 +2,20 @@ import boto3
 from .poster import poster
 
 class AWSConnection:
-  connection = {}
+
+  def __init__(self):
+    self.connection = {}
+
   def initConnection(self, resource, region):
     if resource not in self.connection:
       try:
-        poster.debug("Creating aws connection")
+        poster.debug("Region -- {}".format(region))
+        poster.debug("Creating aws connection for -- {}".format(resource))  
         self.connection[resource] = boto3.client(resource, region_name=region)
       except Exception as e:
-        poster.error("Error while creating aws connection {}".format(e))
+        poster.error("Something went wrong while creating connection with {}".format(resource))
+        poster.error(e)
 
   def getConnection(self, resource):
+    poster.debug("Returning connection for {}".format(resource))
     return self.connection[resource]
-
-  def getResource(self, resource):
-      return self.resources[resource]
